@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/DevOps",
+    "public": "dist/aplikasi-belanja",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
