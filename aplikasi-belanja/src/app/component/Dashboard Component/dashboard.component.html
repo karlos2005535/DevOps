@@ -1,0 +1,37 @@
+<div class="dashboard-container">
+  <nav class="navbar">
+    <div class="brand">
+      <span class="icon">🛒</span>
+      <span>Toko Serba Ada</span>
+    </div>
+    <button class="btn-logout" (click)="logout()">Logout</button>
+  </nav>
+
+  <div class="content">
+    <div class="welcome-section">
+      <h1>Selamat Datang, {{ currentUser?.username }}!</h1>
+      <p>Apa yang kamu cari pasti ada di toko kami.</p>
+    </div>
+
+    <div class="shop-photo-container">
+      <div class="photo-frame">
+        <img
+          src="https://media.istockphoto.com/id/1186937462/id/foto/asia-melayu-perempuan-pemilik-toko-rempah-rempah-menerima-keranjang-produk-dari-pelanggannya.jpg?s=612x612&w=0&k=20&c=al3bgaQnGG_6ON134zkCJNTdhdVNdhAMfYT_7MLbERc="
+          alt="Toko Serba Ada"
+          class="shop-photo"
+        />
+        <div class="photo-caption">
+          <h3>Toko Serba Ada - Semua Kebutuhan Anda</h3>
+          <p>
+            Melayani dengan sepenuh hati sejak 1990. Dari sembako hingga kebutuhan sehari-hari, kami
+            siap melayani Anda.
+          </p>
+          <div class="shop-status">
+            <div class="status-indicator active"></div>
+            <span class="status-text">Buka 08:00 - 20:00 WIB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
