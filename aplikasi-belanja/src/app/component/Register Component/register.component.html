@@ -10,12 +10,12 @@
       <div class="store-logo">
         <div class="logo-icon">🛒</div>
       </div>
-      <div class="store-name">Toko Pak Baco</div>
-      <div class="store-tagline">Kios Sembako Khas Indonesia</div>
+      <div class="store-name">Warung Serba Ada</div>
+      <div class="store-tagline">Apapun yang kamu cari pasti ada</div>
     </div>
 
-    <h1 class="title">Buat akun di nggih</h1>
-    <p class="subtitle">Bergabunglah dengan kami hari ini</p>
+    <h1 class="title">Buat Akun Baru</h1>
+    <p class="subtitle">Bergabunglah dengan pelanggan setia kami</p>
 
     <form class="register-form" (submit)="register($event)">
       <div class="form-group">
@@ -77,11 +77,11 @@
         <div class="password-match" [class]="getPasswordMatchClass()">
           <span class="match-icon">
             {{
-              getPasswordMatchClass() === 'match'
-                ? '✓'
-                : getPasswordMatchClass() === 'mismatch'
-                ? '✗'
-                : ''
+              getPasswordMatchClass() === "match"
+                ? "✓"
+                : getPasswordMatchClass() === "mismatch"
+                ? "✗"
+                : ""
             }}
           </span>
           {{ getPasswordMatchText() }}

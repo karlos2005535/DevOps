@@ -25,6 +25,10 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(): void {
+    // 1. Hapus sesi (Token/LocalStorage)
     this.authService.logout();
+
+    // 2. Arahkan pengguna kembali ke halaman login (INI YANG SEBELUMNYA KURANG)
+    this.router.navigate(['/login']);
   }
 }

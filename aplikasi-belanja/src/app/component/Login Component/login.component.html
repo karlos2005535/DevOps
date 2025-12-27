@@ -1,22 +1,17 @@
-<!-- components/login/login.component.html -->
 <div class="login-container">
-  <div class="background-animation">
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
-  </div>
+  <div class="bg-overlay"></div>
 
   <div class="login-card fade-in-up">
     <div class="brand-section">
       <div class="store-logo">
         <div class="logo-icon">🛒</div>
       </div>
-      <div class="store-name">Toko Serba Ada</div>
-      <div class="store-tagline">Kios Sembako Khas Indonesia</div>
+      <div class="store-name">Warung Serba Ada</div>
+      <div class="store-tagline">Apapun yang kamu cari pasti ada</div>
     </div>
 
     <h1 class="title">Selamat Datang</h1>
-    <p class="subtitle">Masuk untuk melanjutkan</p>
+    <p class="subtitle">Masuk untuk melanjutkan belanja di warung kami</p>
 
     <form class="login-form" (submit)="login(); $event.preventDefault()">
       <div class="form-group">
@@ -29,7 +24,7 @@
             class="form-input"
             [(ngModel)]="username"
             name="username"
-            placeholder="Enter your username"
+            placeholder="Masukkan username"
             required
           />
         </div>
@@ -45,29 +40,28 @@
             class="form-input"
             [(ngModel)]="password"
             name="password"
-            placeholder="Enter your password"
+            placeholder="Masukkan password"
             required
           />
         </div>
       </div>
 
       <button type="submit" class="btn-login">
-        <span class="btn-text">Sign In</span>
+        <span class="btn-text">Masuk Sekarang</span>
         <span class="btn-icon">→</span>
       </button>
     </form>
 
     <div class="text-center mt-3">
       <p>
-        Don't have an account?
+        Belum punya akun?
         <a (click)="goToRegister()" class="link">
-          <span>Sign up here</span>
+          <span>Daftar di sini</span>
           <span class="link-arrow">↗</span>
         </a>
       </p>
     </div>
 
-    <!-- Demo Accounts Section -->
     <div class="demo-section">
       <div class="demo-header">
         <span class="demo-icon">💡</span>
