@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/aplikasi-belanja",
+    "public": "dist/aplikasi-belanja/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
