@@ -1,3 +1,5 @@
+[file name]: src/app/components/dashboard/dashboard.component.spec.ts
+[file content begin]
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { AuthService } from '../../services/auth.service';
@@ -7,22 +9,25 @@ import { By } from '@angular/platform-browser';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let authServiceMock: Partial<AuthService>;
+  let routerMock: Partial<Router>;
 
   beforeEach(async () => {
-    authServiceSpy = jasmine.createSpyObj('AuthService', [
-      'isLoggedIn',
-      'getCurrentUser',
-      'logout',
-    ]);
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    authServiceMock = {
+      isLoggedIn: jest.fn(),
+      getCurrentUser: jest.fn(),
+      logout: jest.fn()
+    };
+    
+    routerMock = {
+      navigate: jest.fn()
+    };
 
     await TestBed.configureTestingModule({
       imports: [DashboardComponent],
       providers: [
-        { provide: AuthService, useValue: authServiceSpy },
-        { provide: Router, useValue: routerSpy },
+        { provide: AuthService, useValue: authServiceMock },
+        { provide: Router, useValue: routerMock },
       ],
     }).compileComponents();
 
@@ -31,17 +36,17 @@ describe('DashboardComponent', () => {
   });
 
   const setupLoggedInUser = () => {
-    authServiceSpy.isLoggedIn.and.returnValue(true);
-    authServiceSpy.getCurrentUser.and.returnValue({ username: 'testuser' });
+    (authServiceMock.isLoggedIn as jest.Mock).mockReturnValue(true);
+    (authServiceMock.getCurrentUser as jest.Mock).mockReturnValue({ username: 'testuser' });
     fixture.detectChanges();
   };
 
-  it('should create the app', () => {
+  it('should create the component', () => {
     setupLoggedInUser();
     expect(component).toBeTruthy();
   });
 
-  it('should render the correct brand name "Warung Serba Ada"', () => {
+  it('should display the correct brand name "Warung Serba Ada"', () => {
     setupLoggedInUser();
     const brandElement = fixture.debugElement.query(
       By.css('.brand span:last-child')
@@ -69,26 +74,35 @@ describe('DashboardComponent', () => {
     );
   });
 
-  it('should navigate to login if not logged in (Guard Check)', () => {
-    authServiceSpy.isLoggedIn.and.returnValue(false);
+  it('should navigate to login if not logged in', () => {
+    (authServiceMock.isLoggedIn as jest.Mock).mockReturnValue(false);
     component.ngOnInit();
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
   });
 
-  // UPDATE PADA BAGIAN INI
   it('should call logout service and navigate to login when logout button is clicked', () => {
     setupLoggedInUser();
 
-    // 1. Cari tombol logout
+    // Cari tombol logout
     const logoutBtn = fixture.debugElement.query(By.css('.btn-logout'));
-
-    // 2. Simulasikan klik
+    
+    // Simulasikan klik
     logoutBtn.triggerEventHandler('click', null);
 
-    // 3. Pastikan method authService.logout dipanggil
-    expect(authServiceSpy.logout).toHaveBeenCalled();
+    // Pastikan method authService.logout dipanggil
+    expect(authServiceMock.logout).toHaveBeenCalled();
 
-    // 4. Pastikan router mengarahkan ke '/login'
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
+    // Pastikan router mengarahkan ke '/login'
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+  });
+
+  it('should initialize with currentUser from auth service', () => {
+    (authServiceMock.isLoggedIn as jest.Mock).mockReturnValue(true);
+    (authServiceMock.getCurrentUser as jest.Mock).mockReturnValue({ username: 'admin' });
+    
+    component.ngOnInit();
+    
+    expect(component.currentUser).toEqual({ username: 'admin' });
   });
 });
+[file content end]

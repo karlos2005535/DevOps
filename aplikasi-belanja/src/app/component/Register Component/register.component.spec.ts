@@ -1,4 +1,3 @@
-// src/app/components/register/register.component.spec.ts
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register.component';
@@ -8,15 +7,20 @@ import { Router } from '@angular/router';
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
-  let routerSpy: jasmine.SpyObj<Router>;
+
+  // Definisi tipe Mock untuk Jest agar TypeScript mengenali method-nya
+  let authServiceSpy: { isLoggedIn: jest.Mock; register: jest.Mock };
+  let routerSpy: { navigate: jest.Mock };
 
   beforeEach(async () => {
-    authServiceSpy = jasmine.createSpyObj('AuthService', [
-      'isLoggedIn',
-      'register',
-    ]);
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    // 1. Setup Mock menggunakan jest.fn() pengganti jasmine.createSpyObj
+    authServiceSpy = {
+      isLoggedIn: jest.fn(),
+      register: jest.fn(),
+    };
+    routerSpy = {
+      navigate: jest.fn(),
+    };
 
     await TestBed.configureTestingModule({
       imports: [RegisterComponent, FormsModule],
@@ -28,16 +32,25 @@ describe('RegisterComponent', () => {
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    // Catatan: Saya menghapus fixture.detectChanges() dari sini
+    // agar kita bisa mengatur nilai mock 'isLoggedIn' sebelum ngOnInit berjalan otomatis.
   });
 
   it('should create', () => {
+    fixture.detectChanges(); // Jalankan inisialisasi komponen di sini
     expect(component).toBeTruthy();
   });
 
   it('should navigate to dashboard if already logged in', () => {
-    authServiceSpy.isLoggedIn.and.returnValue(true);
-    component.ngOnInit();
+    // 2. Gunakan mockReturnValue (Syntax Jest)
+    // Set user seolah-olah sudah login SEBELUM komponen dimulai
+    authServiceSpy.isLoggedIn.mockReturnValue(true);
+
+    // Trigger deteksi perubahan (ini akan menjalankan ngOnInit)
+    fixture.detectChanges();
+
+    // Cek apakah router melakukan navigasi
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
   });
 });
