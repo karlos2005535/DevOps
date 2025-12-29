@@ -74,6 +74,8 @@ export class RegisterComponent implements OnInit {
 
   getPasswordMatchText(): string {
     if (!this.confirmPassword) return 'Harap konfirmasi password Anda';
-    return this.password === this.confirmPassword ? 'Password cocok' : 'Password tidak cocok';
+    return this.password === this.confirmPassword
+      ? 'Password cocok'
+      : 'Password tidak cocok';
   }
 }

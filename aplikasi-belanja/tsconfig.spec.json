@@ -2,10 +2,21 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
+    "module": "commonjs",
     "types": ["jest", "node"],
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "emitDecoratorMetadata": true
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "strict": false,
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   },
-  "files": ["src/polyfills.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts",
+    "setup-jest.ts",
+    "jest.config.js"
+  ]
 }

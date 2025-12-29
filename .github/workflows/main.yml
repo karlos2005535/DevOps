@@ -1,0 +1,35 @@
+name: Angular CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # 3. Install Dependencies (Pakai legacy-peer-deps karena Angular 21)
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      # 4. Jalankan Testing (Jest)
+      - name: Run Tests
+        run: npm run test:ci
+
+      # 5. Build Project
+      - name: Build Application
+        run: npm run build
