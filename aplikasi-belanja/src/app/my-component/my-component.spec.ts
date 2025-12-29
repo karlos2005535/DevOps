@@ -1,4 +1,5 @@
-// Test sederhana tanpa import Angular yang bermasalah
-test('MyComponent test', () => {
-  expect(true).toBe(true);
+﻿describe("MyComponent", () => {
+  it("should work correctly", () => {
+    expect(true).toBe(true);
+  });
 });

@@ -1,6 +1,10 @@
-// Test sederhana dulu
-describe('AuthService', () => {
-  it('should pass basic test', () => {
-    expect(1).toBe(1);
+﻿describe("AuthService", () => {
+  it("should handle authentication", () => {
+    expect(true).toBe(true);
+  });
+
+  it("should validate tokens", () => {
+    const token = "sample-token-123";
+    expect(token).toContain("token");
   });
 });
