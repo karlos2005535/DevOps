@@ -1,0 +1,5 @@
+﻿# CI/CD TEST FILE
+Created: 2025-12-29 23:59:10
+Branch: baco
+Purpose: Trigger GitHub Actions
+Status: Testing if workflow runs

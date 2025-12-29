@@ -1,0 +1,17 @@
+﻿name: SUPER SIMPLE TEST
+on: 
+  push:
+    branches: [baco]
+  workflow_dispatch:
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello
+        run: |
+          echo "🎉 HELLO FROM GITHUB ACTIONS!"
+          echo "✅ This proves CI/CD is WORKING"
+          echo "📌 Branch: ${{ github.ref }}"
+          echo "📅 Time: $(date)"
+          echo ""
+          echo "🚀 SUCCESS!"
